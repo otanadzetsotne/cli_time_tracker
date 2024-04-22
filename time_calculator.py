@@ -65,7 +65,7 @@ def calculate_total_work_time(logs, since):
                 session_active = False
 
     total_hours = total_time / 3600
-    print(f'Full working time: {total_hours:.2f} hours')
+    print(f'\u001b[30m\u001b[42mFull working time: {total_hours:.2f} hours\u001b[0m')
     return total_hours
 
 
