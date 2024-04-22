@@ -40,7 +40,19 @@ def calculate_total_work_time(logs):
     return total_hours
 
 
-if __name__ == '__main__':
+def start(logger, project):
+    logger.info(f'{project}. Starting time_tracker')
+
+
+def stop(logger, project):
+    logger.info(f'{project}. Stop')
+
+
+def info(logger, project, msg):
+    logger.info(f'{project}. {msg}')
+
+
+def main():
     tracker_logs_file = os.environ.get('TIME_TRACKING_LOGS', tracker_logs_file_default())
     logging.basicConfig(
         filename=tracker_logs_file,
@@ -51,18 +63,28 @@ if __name__ == '__main__':
     )
     logger = logging.getLogger('time_tracker')
 
-    logger.info('Starting time_tracker')
+    project = input('Enter project name: ').strip()
+    start(logger, project)
     while True:
         msg = input('Enter completed task: ').strip()
 
         if msg.lower() == 'stop':
-            logger.info(msg)
+            stop(logger, project)
             break
-
-        if msg:
-            logger.info(msg)
+        elif msg.lower() == 'change project':
+            new_project = input('Enter project name: ').strip()
+            stop(logger, project)
+            project = new_project
+            start(logger, project)
+        elif msg:
+            info(logger, project, msg)
 
     with open(tracker_logs_file, 'r') as f:
         tracker_logs = f.read()
+
     calculated_time = calculate_total_work_time(tracker_logs)
     print(f'Full working time: {calculated_time:.2f} hours')
+
+
+if __name__ == '__main__':
+    main()
