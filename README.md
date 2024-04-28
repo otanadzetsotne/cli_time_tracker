@@ -1,4 +1,4 @@
-# Time Tracker
+# Time Bug
 
 This repository contains a set of Python scripts designed to help track work time on various projects efficiently. The `app.py` script logs the start and end times of work sessions, manages AFK periods effectively, and the `time_calculator.py` script calculates the total time spent on each project.
 
